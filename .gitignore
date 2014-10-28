@@ -1,0 +1,9 @@
+*.tgz
+/node_modules/
+/test-results/
+.idea/
+coverage
+build
+npm-debug.log
+*.env
+*.log
