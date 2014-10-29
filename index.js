@@ -2,9 +2,10 @@
 
 var q = require("q");
 var request = require('request');
-var config = require('konfig')()
+var config = require('konfig')();
 var log4js = require('log4js');
 var pouchdb = require('pouchdb');
+var restClient = require('./libs/rest-client.js');
 
 var LOG_CATEGORY = 'lomis-openlmis-link';
 log4js.configure({
@@ -24,6 +25,7 @@ var options = {
     include_docs: true,
     since: 'now'
 };
+
 mainDB.changes(options)
     .on('change', function (change) {
         logger.info(change);
