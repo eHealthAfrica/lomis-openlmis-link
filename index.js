@@ -56,7 +56,7 @@ var generateReport = function (stockCount, program, agentCode) {
   return restClient.getProgramProducts(program)
     .then(function (res) {
       var programProductList = converter.fromStockCount(stockCount, res.programProductList);
-      return converter.createReport(agentCode, defaultProgram, programProductList);
+      return converter.createReport(agentCode, program, programProductList);
     });
 };
 
