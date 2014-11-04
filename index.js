@@ -35,7 +35,12 @@ mainDB.changes(options)
     var stockCount = change.doc;
     submitStockCount(stockCount, defaultProgram, agentCode)
       .then(function (res) {
-        logger.info(res);
+        if(res.error){
+          logger.error(res);
+        }else{
+          //TODO: write requisition id, report, stock count and date time to requisition db on LoMIS.
+          logger.info(res);
+        }
       })
       .catch(function (err) {
         logger.error(err);
@@ -56,7 +61,7 @@ var generateReport = function (stockCount, program, agentCode) {
   return restClient.getProgramProducts(program)
     .then(function (res) {
       var programProductList = converter.fromStockCount(stockCount, res.programProductList);
-      return converter.createReport(agentCode, defaultProgram, programProductList);
+      return converter.createReport(agentCode, program, programProductList);
     });
 };
 
